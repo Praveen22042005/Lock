@@ -79,7 +79,3 @@ The system uses a `XXXXX-XXXXX-XXXXX-XXXXX-XXXXX` format. Each group consists of
 **DPAPI Storage**: Locally stores activation tokens encrypted with Windows Data Protection API (DPAPI). This ensures they can only be read by the current user on the same machine, preventing token portability.
 
 **RSA Signing**: The API signs tokens using RSA-2048. The client verifies this signature using an embedded public key, ensuring that the token was issued by the legitimate server and has not been tampered with.
-
-## Contributing
-
-Contributions are welcome! If you have suggestions or want to report a bug, please open an issue first to discuss your ideas.
