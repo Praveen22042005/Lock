@@ -7,14 +7,23 @@ public class SigningService
 {
     private readonly RSA rsa;
 
-    public SigningService(string keyPath)
+    public SigningService(string keySource)
     {
-        if (!File.Exists(keyPath))
+        string keyContent;
+
+        if (keySource.StartsWith("-----BEGIN"))
         {
-            throw new FileNotFoundException($"The RSA private key file was not found at: {keyPath}");
+            keyContent = keySource;
+        }
+        else
+        {
+            if (!File.Exists(keySource))
+            {
+                throw new FileNotFoundException($"The RSA private key file was not found at: {keySource}");
+            }
+            keyContent = File.ReadAllText(keySource);
         }
 
-        var keyContent = File.ReadAllText(keyPath);
         rsa = RSA.Create();
         rsa.ImportFromPem(keyContent);
     }

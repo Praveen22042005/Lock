@@ -4,10 +4,14 @@ using Lock.API.Endpoints;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("NeonDatabase") ?? string.Empty;
-var keyPath = builder.Configuration.GetSection("ApiSettings")["RsaPrivateKeyPath"] ?? string.Empty;
+
+var envKeyContents = Environment.GetEnvironmentVariable("RSA_PRIVATE_KEY_CONTENTS");
+var keySource = !string.IsNullOrEmpty(envKeyContents) 
+    ? envKeyContents 
+    : builder.Configuration.GetSection("ApiSettings")["RsaPrivateKeyPath"] ?? string.Empty;
 
 builder.Services.AddSingleton(new LicenseService(connectionString));
-builder.Services.AddSingleton(new SigningService(keyPath));
+builder.Services.AddSingleton(new SigningService(keySource));
 
 var app = builder.Build();
 
