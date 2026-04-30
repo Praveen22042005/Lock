@@ -21,7 +21,7 @@ public class ActivationService
         this.hardwareIdService = hardwareIdService;
         this.httpClient = new HttpClient
         {
-            BaseAddress = new Uri("http://localhost:5100")
+            BaseAddress = new Uri("https://lock-api-vznn.onrender.com")
         };
     }
 
