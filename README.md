@@ -1,6 +1,10 @@
 # Lock
 
-A machine-bound software licensing system for .NET desktop applications. Enforces one activation per physical PC using hardware fingerprinting, RSA-signed tokens, DPAPI local storage, and a cloud-backed activation API built on ASP.NET Core and Neon PostgreSQL.
+## Download
+
+Download the latest Windows executable: [Download Lock.Client.exe](https://github.com/Praveen22042005/Lock/raw/main/Lock.Client/publish/win-x64/Lock.Client.exe)
+
+*Windows 10 or 11 x64 required. No installation needed. Run the exe directly. If Windows SmartScreen appears, click "More info" then "Run anyway".*
 
 ## System Architecture
 
