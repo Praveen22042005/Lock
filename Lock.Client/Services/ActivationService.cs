@@ -33,6 +33,7 @@ public class ActivationService
             Hwid = hwid,
             LicenseKey = licenseKey,
             Email = email,
+            FullName = fullName,
             MachineName = Environment.MachineName,
             LicenseKeyId = string.Empty
         };

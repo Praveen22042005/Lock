@@ -37,7 +37,8 @@ public class ActivateEndpoint
             return Results.BadRequest("maximum activations reached");
         }
 
-        await licenseService.UpsertActivationAsync(license.Value.id, body.Hwid, null, body.MachineName);
+        var userId = await licenseService.UpsertUserAsync(body.Email, body.FullName);
+        await licenseService.UpsertActivationAsync(license.Value.id, body.Hwid, userId, body.MachineName);
 
         var issuedAt = DateTime.UtcNow;
         var expiresAt = issuedAt.AddDays(30);

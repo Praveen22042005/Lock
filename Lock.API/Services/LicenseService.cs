@@ -20,6 +20,28 @@ public class LicenseService
         return Convert.ToHexString(hash).ToLower();
     }
 
+    public async Task<Guid> UpsertUserAsync(string email, string fullName)
+    {
+        using var connection = new NpgsqlConnection(connectionString);
+        await connection.OpenAsync();
+
+        var sql = @"
+            INSERT INTO users (id, email, full_name, created_at)
+            VALUES (gen_random_uuid(), @email, @fullName, @now)
+            ON CONFLICT (email) 
+            DO UPDATE SET 
+                full_name = EXCLUDED.full_name
+            RETURNING id";
+
+        using var command = new NpgsqlCommand(sql, connection);
+        command.Parameters.AddWithValue("email", email);
+        command.Parameters.AddWithValue("fullName", fullName);
+        command.Parameters.AddWithValue("now", DateTime.UtcNow);
+
+        var result = await command.ExecuteScalarAsync();
+        return result is Guid id ? id : Guid.Empty;
+    }
+
     public async Task<(Guid id, string productId, int maxActivations, string status)?> GetLicenseKeyAsync(string licenseKey)
     {
         var keyHash = HashKey(licenseKey);

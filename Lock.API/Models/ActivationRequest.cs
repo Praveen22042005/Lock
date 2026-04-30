@@ -6,6 +6,7 @@ public class ActivationRequest
     public string LicenseKey { get; set; } = string.Empty;
     public string LicenseKeyId { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
+    public string FullName { get; set; } = string.Empty;
     public string MachineName { get; set; } = string.Empty;
     public string IpAddress { get; set; } = string.Empty;
 }
