@@ -1,0 +1,10 @@
+.env
+privatekey.pem
+appsettings.Development.json
+*/bin/
+*/obj/
+*.user
+.vs/
+*.suo
+*.userosscache
+*.sln.docstates

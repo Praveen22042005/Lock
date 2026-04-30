@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Lock.API/Lock.API.csproj" />
+  <Project Path="Lock.Client/Lock.Client.csproj" />
+  <Project Path="Lock.Shared/Lock.Shared.csproj" />
+</Solution>
