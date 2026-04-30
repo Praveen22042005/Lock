@@ -13,8 +13,7 @@ RUN dotnet restore "Lock.API/Lock.API.csproj"
 COPY . .
 
 # Build and publish
-WORKDIR "/src/Lock.API"
-RUN dotnet publish "Lock.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Lock.API/Lock.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # Runtime Stage
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
