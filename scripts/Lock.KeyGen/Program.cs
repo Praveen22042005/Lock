@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using Npgsql;
+using Microsoft.Extensions.Configuration;
 
 var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 var random = new Random();
@@ -22,10 +23,15 @@ Console.WriteLine($"Generated License Key: {licenseKey}");
 var hashBytes = SHA256.HashData(Encoding.UTF8.GetBytes(licenseKey));
 var keyHash = Convert.ToHexString(hashBytes).ToLower();
 
-var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+var config = new ConfigurationBuilder()
+    .SetBasePath(AppContext.BaseDirectory)
+    .AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: false)
+    .Build();
+
+var databaseUrl = config.GetConnectionString("NeonDatabase");
 if (string.IsNullOrEmpty(databaseUrl))
 {
-    Console.WriteLine("Error: DATABASE_URL environment variable is not set.");
+    Console.WriteLine("Error: Connection string 'NeonDatabase' not found in appsettings.Development.json.");
     return;
 }
 

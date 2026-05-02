@@ -8,3 +8,7 @@ appsettings.Development.json
 *.suo
 *.userosscache
 *.sln.docstates
+bin/
+obj/
+publish/
+**/publish/
